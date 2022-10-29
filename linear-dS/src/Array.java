@@ -63,5 +63,43 @@ public class Array {
         return reversed;
     }
 
+    public int max(){
+        int max = 0;
+        for (int i = 0; i < count; i++) {
+            if (items[i] > max) {
+                max = items[i];
+            }
+        }
+        return max;
+    }
+    public int[] intersect(int[] array) {
+        int[] common = new int[count];
+        int k = 0;
+        for (int i = 0; i < count; i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (items[i] == array[j]) {
+                    common[k++] = items[i];
+                }
+            }
+        }
+        return common;
+    }
+
+    public void insertAt(int item, int index){
+        if (index < 0 || index > count) {
+            throw new IllegalArgumentException();
+        }
+
+        //To prevent "Index n out of bounds for length n" exception
+        if (items.length == count) {
+            expandArrayCapacity();
+        }
+
+        for (int i = count; i > index; i--) {
+            items[i] = items[i - 1];
+        }
+        items[index] = item;
+        count++;
+    }
 
 }
